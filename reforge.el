@@ -5,7 +5,7 @@
 ;; Author: Naoya Yamashita <conao3@gmail.com>
 ;; Version: 0.0.1
 ;; Keywords: convenience
-;; Package-Requires: ((emacs "26.1"))
+;; Package-Requires: ((emacs "26.1") (magit "2.90"))
 ;; URL: https://github.com/conao3/reforge.el
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -28,11 +28,27 @@
 
 ;;; Code:
 
+(require 'magit)
+(require 'reforge-forge)
+
 (defgroup reforge nil
   "Yet another forge; collaborate on GitHub using Magit."
   :group 'convenience
   :link '(url-link :tag "Github" "https://github.com/conao3/reforge.el"))
 
-(provide 'reforge)
+;;;###autoload (autoload 'reforge-dispatch "reforge" nil t)
+(transient-define-prefix reforge-dispatch ()
+  "Dispatch a reforge command."
+  [["GitHub"
+    ("\\" "Forge" reforge-forge-dispatch)]])
 
+;;;###autoload
+(defun reforge-init ()
+  "Initialize reforge."
+  (interactive)
+  (define-key magit-mode-map (kbd "\\") 'reforge-dispatch)
+  (transient-append-suffix 'magit-dispatch "%"
+    '("\\" "ReForge" reforge-dispatch ?\\)))
+
+(provide 'reforge)
 ;;; reforge.el ends here
