@@ -1,0 +1,9 @@
+;; Keg
+
+(source gnu melpa)
+
+(package
+ (reforge
+  (recipe . (reforge :fetcher github :repo "conao3/reforge.el"))))
+
+(dev-dependency cort)
