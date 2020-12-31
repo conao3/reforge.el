@@ -5,7 +5,7 @@
 ;; Author: Naoya Yamashita <conao3@gmail.com>
 ;; Version: 0.0.1
 ;; Keywords: convenience
-;; Package-Requires: ((emacs "26.1") (magit "2.90") (promise "1.1"))
+;; Package-Requires: ((emacs "26.1") (magit "2.90") (promise "1.1") (closql "1.0.4"))
 ;; URL: https://github.com/conao3/reforge.el
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -29,6 +29,8 @@
 ;;; Code:
 
 (require 'magit)
+
+(require 'reforge-core)
 (require 'reforge-forge)
 
 (defgroup reforge nil
