@@ -1,90 +1,105 @@
-#+author: conao3
-#+date: <2020-03-20 Fri>
+#+title: reforge.el
+#+author: Naoya Yamashita
 
-[[https://github.com/conao3/reforge.el][https://raw.githubusercontent.com/conao3/files/master/blob/headers/png/reforge.el.png]]
 [[https://github.com/conao3/reforge.el/blob/master/LICENSE][https://img.shields.io/github/license/conao3/reforge.el.svg?style=flat-square]]
 [[https://github.com/conao3/reforge.el/releases][https://img.shields.io/github/tag/conao3/reforge.el.svg?style=flat-square]]
 [[https://github.com/conao3/reforge.el/actions][https://github.com/conao3/reforge.el/workflows/Main%20workflow/badge.svg]]
-[[https://app.codacy.com/project/conao3/reforge.el/dashboard][https://img.shields.io/codacy/grade/62a36f4f04524d5e8c758440e8071c45.svg?logo=codacy&style=flat-square]]
-[[https://www.patreon.com/conao3][https://img.shields.io/badge/patreon-become%20a%20patron-orange.svg?logo=patreon&style=flat-square]]
-[[https://twitter.com/conao_3][https://img.shields.io/badge/twitter-@conao__3-blue.svg?logo=twitter&style=flat-square]]
-[[https://conao3-support.slack.com/join/shared_invite/enQtNjUzMDMxODcyMjE1LWUwMjhiNTU3Yjk3ODIwNzAxMTgwOTkxNmJiN2M4OTZkMWY0NjI4ZTg4MTVlNzcwNDY2ZjVjYmRiZmJjZDU4MDE][https://img.shields.io/badge/chat-on_slack-blue.svg?logo=slack&style=flat-square]]
 
-* Table of Contents
-- [[#description][Description]]
-- [[#install][Install]]
-- [[#usage][Usage]]
-- [[#customize][Customize]]
-- [[#information][Information]]
-  - [[#community][Community]]
-  - [[#contribution][Contribution]]
-  - [[#migration][Migration]]
-  - [[#license][License]]
-  - [[#author][Author]]
-  - [[#contributors][Contributors]]
+A modern GitHub collaboration interface for Emacs, built on top of Magit.
 
-* Description
-[[https://github.com/conao3/reforge.el][https://raw.githubusercontent.com/conao3/files/master/blob/reforge.el/reforge.gif]]
+* Overview
 
-Yet another forge; collaborate on GitHub using Magit.
+reforge.el provides seamless integration between Emacs and GitHub, allowing you to manage repositories, issues, and pull requests directly from your editor. It extends Magit with a dedicated transient interface for GitHub operations.
 
-* Install
-Sample install code using [[https://github.com/conao3/leaf.el][leaf.el]].
+* Features
+
+- Transient-based UI integrated with Magit
+- GitHub repository browsing and management
+- Async operations using promises for smooth performance
+- Database-backed with closql for efficient data handling
+
+* Requirements
+
+- Emacs 26.1 or later
+- Magit 2.90 or later
+- promise.el 1.1 or later
+- closql 1.0.4 or later
+
+* Installation
+
+** Using leaf.el
 
 #+begin_src emacs-lisp
-  (leaf reforge :ensure t)
+(leaf reforge :ensure t)
 #+end_src
 
-* Usage
+** Using use-package
 
-* Customize
+#+begin_src emacs-lisp
+(use-package reforge
+  :ensure t)
+#+end_src
 
-* Information
-** Community
-Any feedback or suggestions are welcome!
+** Manual Installation
 
-You can use github issues, but you can also use [[https://conao3-support.slack.com/join/shared_invite/enQtNjUzMDMxODcyMjE1LWUwMjhiNTU3Yjk3ODIwNzAxMTgwOTkxNmJiN2M4OTZkMWY0NjI4ZTg4MTVlNzcwNDY2ZjVjYmRiZmJjZDU4MDE][Slack]]
-if you want a more casual conversation.
+Clone this repository and add it to your load-path:
 
-** Contribution
-We welcome PR!
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/path/to/reforge.el")
+(require 'reforge)
+#+end_src
 
-*** Require tools for testing
-- keg
-  #+begin_src shell
-    cd ~/
-    hub clone conao3/keg .keg
-    export PATH="$HOME/.keg/bin:$PATH"
-  #+end_src
+* Quick Start
 
-*** Running test
-Below operation flow is recommended.
+Initialize reforge to add keybindings to Magit:
+
+#+begin_src emacs-lisp
+(reforge-init)
+#+end_src
+
+Once initialized, press =\= in any Magit buffer to access the reforge dispatch menu.
+
+* Configuration
+
+reforge.el works out of the box with sensible defaults. Customize the =reforge= group for available options:
+
+#+begin_src emacs-lisp
+M-x customize-group RET reforge RET
+#+end_src
+
+* Contributing
+
+Contributions are welcome. Please feel free to submit issues and pull requests on GitHub.
+
+** Development Setup
+
+Install keg for testing:
+
 #+begin_src shell
-  git branch [feature-branch]       # Create branch named [feature-branch]
-  git checkout [feature-branch]     # Checkout branch named [feature-branch]
-
-  # <edit loop>
-  emacs reforge.el             # Edit something you want
-
-  make test                         # Test reforge
-  git commit -am "brabra"           # Commit (auto-run test before commit)
-  # </edit loop>
-
-  hub fork                          # Create fork at GitHub
-  git push [user] [feature-branch]  # Push feature-branch to your fork
-  hub pull-request                  # Create pull-request
+cd ~/
+git clone https://github.com/conao3/keg .keg
+export PATH="$HOME/.keg/bin:$PATH"
 #+end_src
 
-** Migration
+** Running Tests
 
-** License
-#+begin_example
-  General Public License Version 3 (GPLv3)
-  Copyright (c) Naoya Yamashita - https://conao3.com
-  https://github.com/conao3/reforge.el/blob/master/LICENSE
-#+end_example
+#+begin_src shell
+make test
+#+end_src
 
-** Author
-- Naoya Yamashita ([[https://github.com/conao3][conao3]])
+** Workflow
 
-** Contributors
+1. Create a feature branch
+2. Make your changes
+3. Run =make test= to verify
+4. Submit a pull request
+
+* License
+
+GPL-3.0. See [[https://github.com/conao3/reforge.el/blob/master/LICENSE][LICENSE]] for details.
+
+Copyright (c) Naoya Yamashita
+
+* Author
+
+Naoya Yamashita ([[https://github.com/conao3][@conao3]])
