@@ -20,7 +20,7 @@ reforge.el provides seamless integration between Emacs and GitHub, allowing you 
 
 * Requirements
 
-- Emacs 28.1 or later
+- Emacs 29.1 or later
 - Magit 4.5.0 or later
 - promise.el 1.1 or later
 - closql 2.2.0 or later
